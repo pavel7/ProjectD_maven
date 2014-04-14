@@ -14,15 +14,34 @@ import com.omsu.cherepanov.Clients.ObjectStatus;
 public class Connection {
 
     private int objectID;
-    private static int numberOfClients = 0;
     private byte defence;
     private ObjectStatus isStatus;
 
-    public Connection(byte newDefence) {
-        objectID = numberOfClients;
-        numberOfClients++;
+    public Connection() {
+        objectID = 0;
+        defence = 0;
+        isStatus = ObjectStatus.isAlive;
+    }
+
+    public Connection(byte newDefence,int ID) {
+        objectID = ID;
         defence = newDefence;
         isStatus = ObjectStatus.isAlive;
+    }
+
+
+    public void setIsStatus(ObjectStatus isStatus) {
+        this.isStatus = isStatus;
+    }
+
+    public void setDefence(byte defence) {
+
+        this.defence = defence;
+    }
+
+    public ObjectStatus getIsStatus() {
+
+        return isStatus;
     }
 
     public void setObjectID(int ID) {
@@ -31,10 +50,6 @@ public class Connection {
 
     public int getObjectID() {
         return objectID;
-    }
-
-    protected int getNumberOfClients() {
-        return numberOfClients;
     }
 
     public byte getDefence() {

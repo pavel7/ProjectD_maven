@@ -13,14 +13,33 @@ import java.util.HashSet;
  */
 public class Construction extends Mainclient {
 
-    private final String name;
+    private String name;
     private HashSet<People> staff;
+
+    public Construction() {
+        super();
+        name = "";
+        staff = new HashSet<People>();
+    }
 
     public Construction(String newName, int newX, int newY) {
         super(newX, newY);
         name = newName;
         staff = new HashSet<People>();
         //staff = new HashSet();
+    }
+
+    public void setStaff(HashSet<People> staff) {
+        this.staff = staff;
+    }
+
+    public HashSet<People> getStaff() {
+
+        return staff;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {

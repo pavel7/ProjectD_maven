@@ -19,6 +19,13 @@ public class Mainclient {
     private Coordinates point;
     private HashMap<Equipment, Integer> equipment;
 
+    public Mainclient() {
+        objectID = 0;
+        isStatus = ObjectStatus.isAlive;
+        point = new Coordinates();
+        equipment = new HashMap<Equipment, Integer>();
+    }
+
     public Mainclient(double newX, double newY) {
         objectID = numberOfClients;
         numberOfClients++;
@@ -47,12 +54,20 @@ public class Mainclient {
         isStatus = newStatus;
     }
 
-    public void setCoordinates(Coordinates newCoordinates) {
-        point = newCoordinates;
+    public Coordinates getPoint() {
+        return point;
     }
 
-    public Coordinates getCoordinates() {
-        return point;
+    public void setPoint(Coordinates point) {
+        this.point = point;
+    }
+
+    public HashMap<Equipment, Integer> getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(HashMap<Equipment, Integer> equipment) {
+        this.equipment = equipment;
     }
 
     public void addEquipment(Equipment newEquipment, int newAmount) {
@@ -103,6 +118,14 @@ public class Mainclient {
             return false;
         }
         return true;
+    }
+
+    public ObjectStatus getIsStatus() {
+        return isStatus;
+    }
+
+    public void setIsStatus(ObjectStatus isStatus) {
+        this.isStatus = isStatus;
     }
 
     @Override

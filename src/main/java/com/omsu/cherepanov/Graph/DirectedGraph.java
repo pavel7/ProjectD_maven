@@ -24,7 +24,7 @@ public class DirectedGraph {
     private int amountOfVertex;
     private int amountOfEdge;
     private final static byte maxDefence = 100;
-    private static Connection selfEdge = new Connection(maxDefence);
+    private static Connection selfEdge = new Connection(maxDefence,0);
     private ArrayList<ArrayList<ElementOfGraph>> graph;
 
     public DirectedGraph(int amountOfVertex) {

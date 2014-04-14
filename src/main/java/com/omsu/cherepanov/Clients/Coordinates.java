@@ -13,6 +13,11 @@ package com.omsu.cherepanov.Clients;
 public class Coordinates {
     private double x;
     private double y;
+
+    public Coordinates(){
+        x=0;
+        y=0;
+    }
     
     public Coordinates(double newX, double newY){
         x=newX;
@@ -20,7 +25,7 @@ public class Coordinates {
     }
     
     public void setX(int newX){
-        x=newX;
+        this.x=newX;
     }
     
     public double getX(){
@@ -28,7 +33,7 @@ public class Coordinates {
     }
     
     public void setY(int newY){
-        y=newY;
+        this.y=newY;
     }
     
     public double getY(){

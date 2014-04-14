@@ -11,8 +11,14 @@ package com.omsu.cherepanov.Clients;
  */
 public class People extends Mainclient {
 
-    private final String name;
+    private String name;
     private String rank;
+
+    public People() {
+        super();
+        name = "";
+        rank = "";
+    }
 
     public People(String newName, Coordinates newPoint, String newRank) {
         super(newPoint.getX(), newPoint.getY());
@@ -24,12 +30,16 @@ public class People extends Mainclient {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getRank() {
         return rank;
     }
 
     public void setRank(String newRank) {
-        rank = newRank;
+        this.rank = newRank;
     }
 
     @Override

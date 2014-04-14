@@ -24,8 +24,8 @@ public class ProjectX {
         System.out.println("qwe");
         Mainclient test = new Mainclient(0,0);
         Mainclient test1 = new Mainclient(0,0);
-        Connection testC = new Connection ((byte)50);
-        Connection testC1 = new Connection ((byte)75);
+        Connection testC = new Connection ((byte)50,1);
+        Connection testC1 = new Connection ((byte)75,2);
 //        ElementOfGraph testE = new ElementOfGraph(test,test,testC);
 //        ElementOfGraph testE1 = new ElementOfGraph(test,test1,testC);
 //       System.out.println(test.getObjectID());
@@ -56,7 +56,7 @@ public class ProjectX {
         ElementOfGraph test3=new ElementOfGraph(test1,testC1);
         ElementOfGraph test4=new ElementOfGraph(test1,testC);
         ElementOfGraph test5=new ElementOfGraph();
-        Connection testC2=new Connection((byte)90);
+        Connection testC2=new Connection((byte)90,3);
 //        DirectedGraph test12=new DirectedGraph(2);
 //        test12.addVertex(test2);
 //        test12.addVertex(test3);
@@ -74,16 +74,16 @@ public class ProjectX {
         Mainclient test13 = new Mainclient(0,3);
         Mainclient test14 = new Mainclient(0,4);
         Mainclient test15 = new Mainclient(0,5);
-        Connection testC11 = new Connection ((byte)50);
-        Connection testC12 = new Connection ((byte)20);
-        Connection testC13 = new Connection ((byte)40);
-        Connection testC14 = new Connection ((byte)25);
-        Connection testC15 = new Connection ((byte)70);
-        Connection testC16 = new Connection ((byte)50);
-        Connection testC17 = new Connection ((byte)60);
-        Connection testC18 = new Connection ((byte)40);
-        Connection testC19 = new Connection ((byte)45);//changes
-        Connection testC20 = new Connection ((byte)100);
+        Connection testC11 = new Connection ((byte)50,4);
+        Connection testC12 = new Connection ((byte)20,5);
+        Connection testC13 = new Connection ((byte)40,6);
+        Connection testC14 = new Connection ((byte)25,7);
+        Connection testC15 = new Connection ((byte)70,8);
+        Connection testC16 = new Connection ((byte)50,9);
+        Connection testC17 = new Connection ((byte)60,10);
+        Connection testC18 = new Connection ((byte)40,11);
+        Connection testC19 = new Connection ((byte)45,12);//changes
+        Connection testC20 = new Connection ((byte)100,13);
         ElementOfGraph tes1=new ElementOfGraph(test10);
         ElementOfGraph tes2=new ElementOfGraph(test11);
         ElementOfGraph tes3=new ElementOfGraph(test12);
@@ -122,7 +122,7 @@ public class ProjectX {
         int[]path=temp11.pathFromTo();
         
         Mainclient test151 = new Mainclient(0,6);
-        Connection testC111 = new Connection ((byte)150);
+        Connection testC111 = new Connection ((byte)150,14);
         test200.addVertex(new ElementOfGraph(test151,testC111));
         Dijkstra temp111=new Dijkstra(test200,test10,test151);
         int[]path1=temp111.pathFromTo();

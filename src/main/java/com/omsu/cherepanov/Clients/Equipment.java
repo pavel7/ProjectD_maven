@@ -15,16 +15,16 @@ public class Equipment {
     private String identifier;
     private int equipmentID;
 
-    public Equipment(String newType, String newIdentifier, int newEquipmentID) {
-        type = newType;
-        identifier = newIdentifier;
-        equipmentID = newEquipmentID;
-    }
-
     public Equipment() {
         type = "";
         identifier = "";
         equipmentID = 0;
+    }
+
+    public Equipment(String newType, String newIdentifier, int newEquipmentID) {
+        type = newType;
+        identifier = newIdentifier;
+        equipmentID = newEquipmentID;
     }
 
     public Equipment(Equipment newEquipment) {

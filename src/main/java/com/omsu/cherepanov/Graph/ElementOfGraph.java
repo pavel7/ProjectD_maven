@@ -20,8 +20,8 @@ public class ElementOfGraph implements Cloneable {
     private final static byte initialDefenceMin = 0;
     private final static byte initialDefenceMax = 100;
     private final static Mainclient deadClient = new Mainclient(0, 0);
-    private final static Connection destroyedConnection = new Connection(initialDefenceMin);
-    private static Connection selfConnection = new Connection(initialDefenceMax);
+    private final static Connection destroyedConnection = new Connection(initialDefenceMin,20);
+    private static Connection selfConnection = new Connection(initialDefenceMax,21);
 
     static {
         deadClient.setStatus(ObjectStatus.isDead);
