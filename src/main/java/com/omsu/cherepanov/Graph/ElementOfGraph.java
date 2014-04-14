@@ -79,7 +79,7 @@ public class ElementOfGraph implements Cloneable {
 
     @Override
     public int hashCode() {
-        return super.hashCode() + vertex.hashCode() + edge.hashCode();
+        return 7*vertex.hashCode() + 11*edge.hashCode();
     }
     
     @Override

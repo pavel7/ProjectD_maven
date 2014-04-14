@@ -59,7 +59,7 @@ public class Equipment {
 
     @Override
     public int hashCode() {
-        return super.hashCode() + equipmentID + type.hashCode() + identifier.hashCode();
+        return 7*equipmentID + 11*type.hashCode() + 13*identifier.hashCode();
     }
 
 }

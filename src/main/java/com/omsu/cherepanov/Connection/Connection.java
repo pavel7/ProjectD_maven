@@ -69,7 +69,7 @@ public class Connection {
 
     @Override
     public int hashCode() {
-        return super.hashCode() + objectID + defence + isStatus.hashCode();
+        return 7*objectID + 11*defence + 13*isStatus.hashCode();
     }
 
 }

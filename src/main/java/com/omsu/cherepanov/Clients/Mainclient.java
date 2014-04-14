@@ -24,7 +24,7 @@ public class Mainclient {
         numberOfClients++;
         isStatus = ObjectStatus.isAlive;
         point = new Coordinates(newX, newY);
-        equipment = new HashMap();
+        equipment = new HashMap<Equipment, Integer>();
     }
 
     public void setObjectID(int ID) {
@@ -107,7 +107,7 @@ public class Mainclient {
 
     @Override
     public int hashCode() {
-        return super.hashCode() + objectID + isStatus.hashCode() + point.hashCode() + equipment.hashCode();
+        return 7*objectID + 11*isStatus.hashCode() + 13*point.hashCode() + 17*equipment.hashCode();
     }
 
 }

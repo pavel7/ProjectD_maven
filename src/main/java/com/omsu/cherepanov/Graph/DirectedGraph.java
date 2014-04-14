@@ -34,8 +34,8 @@ public class DirectedGraph {
         this.amountOfVertex = amountOfVertex;
         amountOfEdge = 0;
         //this.amountOfEdge = amountOfEdge;
-        //graph = new ArrayList<ArrayList<ElementOfGraph>>(amountOfVertex);
-        graph = new ArrayList(amountOfVertex);
+        graph = new ArrayList<ArrayList<ElementOfGraph>>(amountOfVertex);
+        //graph = new ArrayList(amountOfVertex);
         for (int i = 0; i < amountOfVertex; i++) {
             graph.add((ArrayList<ElementOfGraph>) new ArrayList());
 //            for(int j = 0; j<graph.get(i).size();j++)

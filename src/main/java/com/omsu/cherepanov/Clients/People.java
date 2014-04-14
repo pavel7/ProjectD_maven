@@ -34,7 +34,7 @@ public class People extends Mainclient {
 
     @Override
     public int hashCode() {
-        return super.hashCode() + name.hashCode() + rank.hashCode();
+        return 7*name.hashCode() + 11*rank.hashCode();
     }
 
 }

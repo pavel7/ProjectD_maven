@@ -19,8 +19,8 @@ public class Construction extends Mainclient {
     public Construction(String newName, int newX, int newY) {
         super(newX, newY);
         name = newName;
-        //staff = new HashSet<People>();
-        staff = new HashSet();
+        staff = new HashSet<People>();
+        //staff = new HashSet();
     }
 
     public String getName() {
