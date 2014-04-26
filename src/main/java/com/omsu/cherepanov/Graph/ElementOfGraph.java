@@ -10,7 +10,6 @@ import com.omsu.cherepanov.Clients.ObjectStatus;
 import com.omsu.cherepanov.Connection.Connection;
 
 /**
- *
  * @author Павел
  */
 public class ElementOfGraph implements Cloneable {
@@ -20,8 +19,8 @@ public class ElementOfGraph implements Cloneable {
     private final static byte initialDefenceMin = 0;
     private final static byte initialDefenceMax = 100;
     private final static Mainclient deadClient = new Mainclient(0, 0);
-    private final static Connection destroyedConnection = new Connection(initialDefenceMin,20);
-    private static Connection selfConnection = new Connection(initialDefenceMax,21);
+    private final static Connection destroyedConnection = new Connection(initialDefenceMin, 20);
+    private final static Connection selfConnection = new Connection(initialDefenceMax, 21);
 
     static {
         deadClient.setStatus(ObjectStatus.isDead);
@@ -79,9 +78,9 @@ public class ElementOfGraph implements Cloneable {
 
     @Override
     public int hashCode() {
-        return 7*vertex.hashCode() + 11*edge.hashCode();
+        return 7 * vertex.hashCode() + 11 * edge.hashCode();
     }
-    
+
     @Override
     public ElementOfGraph clone() throws CloneNotSupportedException {
         ElementOfGraph newElem = (ElementOfGraph) super.clone();

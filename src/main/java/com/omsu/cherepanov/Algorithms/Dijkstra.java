@@ -9,10 +9,10 @@ import com.omsu.cherepanov.Clients.Mainclient;
 import com.omsu.cherepanov.Connection.Connection;
 import com.omsu.cherepanov.Graph.DirectedGraph;
 import com.omsu.cherepanov.Graph.ElementOfGraph;
+
 import java.util.Iterator;
 
 /**
- *
  * @author Павел
  */
 public class Dijkstra {

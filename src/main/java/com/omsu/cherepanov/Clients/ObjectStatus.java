@@ -7,8 +7,9 @@
 package com.omsu.cherepanov.Clients;
 
 /**
- *
  * @author Павел
  */
 
-public enum ObjectStatus {isAlive, isUnknow, isDead}
+public enum ObjectStatus {
+    isAlive, isUnknow, isDead
+}

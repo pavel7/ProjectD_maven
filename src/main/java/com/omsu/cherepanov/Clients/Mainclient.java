@@ -5,32 +5,43 @@
  */
 package com.omsu.cherepanov.Clients;
 
+import javax.persistence.*;
 import java.util.HashMap;
 
 /**
- *
  * @author Павел
  */
+@Entity
+@Table(name = "mainclient")
 public class Mainclient {
 
+    @Id
     private int objectID;
-    private static int numberOfClients = 0;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "Status_idStatus")
     private ObjectStatus isStatus;
-    private Coordinates point;
+    @Column(name = "xPoint")
+    private double pointX;
+    @Column(name = "yPoint")
+    private double pointY;
+    @ManyToMany
+    @JoinTable(name="mainclientequ",joinColumns={@JoinColumn(name="Mainclient_objectID")},inverseJoinColumns={@JoinColumn(name="Amount")})
+    @MapKeyJoinColumn(name="Equipment_EquipmentID")
     private HashMap<Equipment, Integer> equipment;
 
     public Mainclient() {
         objectID = 0;
         isStatus = ObjectStatus.isAlive;
-        point = new Coordinates();
+        pointX = 0;
+        pointY = 0;
         equipment = new HashMap<Equipment, Integer>();
     }
 
-    public Mainclient(double newX, double newY) {
-        objectID = numberOfClients;
-        numberOfClients++;
+    public Mainclient(double newX, double newY, int newID) {
+        objectID = newID;
         isStatus = ObjectStatus.isAlive;
-        point = new Coordinates(newX, newY);
+        pointX = newX;
+        pointY = newY;
         equipment = new HashMap<Equipment, Integer>();
     }
 
@@ -42,8 +53,20 @@ public class Mainclient {
         return objectID;
     }
 
-    protected int getNumberOfClients() {
-        return numberOfClients;
+    public double getPointX() {
+        return pointX;
+    }
+
+    public void setPointX(double pointX) {
+        this.pointX = pointX;
+    }
+
+    public double getPointY() {
+        return pointY;
+    }
+
+    public void setPointY(double pointY) {
+        this.pointY = pointY;
     }
 
     public ObjectStatus getStatus() {
@@ -52,14 +75,6 @@ public class Mainclient {
 
     public void setStatus(ObjectStatus newStatus) {
         isStatus = newStatus;
-    }
-
-    public Coordinates getPoint() {
-        return point;
-    }
-
-    public void setPoint(Coordinates point) {
-        this.point = point;
     }
 
     public HashMap<Equipment, Integer> getEquipment() {
@@ -130,7 +145,7 @@ public class Mainclient {
 
     @Override
     public int hashCode() {
-        return 7*objectID + 11*isStatus.hashCode() + 13*point.hashCode() + 17*equipment.hashCode();
+        return 7 * objectID + 11 * isStatus.hashCode() + 13 * (int)pointX+ 17 * (int)pointY + 19 * equipment.hashCode();
     }
 
 }

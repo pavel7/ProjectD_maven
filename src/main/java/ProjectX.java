@@ -6,7 +6,9 @@ import com.omsu.cherepanov.Clients.ObjectStatus;
 import com.omsu.cherepanov.Connection.Connection;
 import com.omsu.cherepanov.Graph.DirectedGraph;
 import com.omsu.cherepanov.Graph.ElementOfGraph;
-import com.omsu.cherepanov.Map.Map;
+import com.omsu.cherepanov.hybernate.ConnectionDAO;
+import com.omsu.cherepanov.hybernate.HibernateUtil;
+
 import java.util.HashMap;
 import java.util.Iterator;
 /*
@@ -120,12 +122,26 @@ public class ProjectX {
         Dijkstra temp11=new Dijkstra(test200,test10,test15);
         Iterator testt=test200.getIteratorOfElem(0);
         int[]path=temp11.pathFromTo();
-        
+
+        Equipment test5555=new Equipment("qwe","qwe",1);
+        ConnectionDAO userDAO = new ConnectionDAO();
+        try {
+            testC11.setIsStatus(ObjectStatus.isDead);
+            userDAO.saveConnection(testC11);
+            testC12.setIsStatus(ObjectStatus.isUnknow);
+            userDAO.saveConnection(testC12);
+            System.out.print("1");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.print("1");
         Mainclient test151 = new Mainclient(0,6);
         Connection testC111 = new Connection ((byte)150,14);
         test200.addVertex(new ElementOfGraph(test151,testC111));
         Dijkstra temp111=new Dijkstra(test200,test10,test151);
         int[]path1=temp111.pathFromTo();
-        
+        System.out.print("1");
+        HibernateUtil.closeSession();
     }
 }

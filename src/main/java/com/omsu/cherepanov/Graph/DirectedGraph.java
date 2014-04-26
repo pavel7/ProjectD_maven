@@ -8,6 +8,7 @@ package com.omsu.cherepanov.Graph;
 
 import com.omsu.cherepanov.Clients.Mainclient;
 import com.omsu.cherepanov.Connection.Connection;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Павел
  */
 //добавления виртуальных целей
@@ -24,7 +24,7 @@ public class DirectedGraph {
     private int amountOfVertex;
     private int amountOfEdge;
     private final static byte maxDefence = 100;
-    private static Connection selfEdge = new Connection(maxDefence,0);
+    private static Connection selfEdge = new Connection(maxDefence, 0);
     private ArrayList<ArrayList<ElementOfGraph>> graph;
 
     public DirectedGraph(int amountOfVertex) {
@@ -175,7 +175,7 @@ public class DirectedGraph {
 
     }
 
-//    public boolean addEdgeBetweenVertices(ElementOfGraph fromVertex, ElementOfGraph toVertex, Connection edge) {
+    //    public boolean addEdgeBetweenVertices(ElementOfGraph fromVertex, ElementOfGraph toVertex, Connection edge) {
 //        if ((fromVertex == null) || (toVertex == null) || (edge == null)) {
 //            return false;
 //        }

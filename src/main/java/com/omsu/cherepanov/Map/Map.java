@@ -6,7 +6,6 @@
 package com.omsu.cherepanov.Map;
 
 /**
- *
  * @author Павел
  */
 public class Map {

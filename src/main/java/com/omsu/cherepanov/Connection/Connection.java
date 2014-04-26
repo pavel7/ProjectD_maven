@@ -7,14 +7,20 @@ package com.omsu.cherepanov.Connection;
 
 import com.omsu.cherepanov.Clients.ObjectStatus;
 
+import javax.persistence.*;
+
 /**
- *
  * @author Павел
  */
+@Entity
+@Table(name = "connection")
 public class Connection {
 
+    @Id
     private int objectID;
     private byte defence;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "Status_idStatus")
     private ObjectStatus isStatus;
 
     public Connection() {
@@ -23,8 +29,8 @@ public class Connection {
         isStatus = ObjectStatus.isAlive;
     }
 
-    public Connection(byte newDefence,int ID) {
-        objectID = ID;
+    public Connection(byte newDefence, int id) {
+        objectID = id;
         defence = newDefence;
         isStatus = ObjectStatus.isAlive;
     }
@@ -44,8 +50,8 @@ public class Connection {
         return isStatus;
     }
 
-    public void setObjectID(int ID) {
-        objectID = ID;
+    public void setObjectID(int id) {
+        objectID = id;
     }
 
     public int getObjectID() {
@@ -84,7 +90,7 @@ public class Connection {
 
     @Override
     public int hashCode() {
-        return 7*objectID + 11*defence + 13*isStatus.hashCode();
+        return 7 * objectID + 11 * defence + 13 * isStatus.hashCode();
     }
 
 }

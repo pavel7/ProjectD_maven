@@ -6,7 +6,6 @@
 package com.omsu.cherepanov.Clients;
 
 /**
- *
  * @author Павел
  */
 public class People extends Mainclient {
@@ -44,7 +43,7 @@ public class People extends Mainclient {
 
     @Override
     public int hashCode() {
-        return 7*name.hashCode() + 11*rank.hashCode();
+        return 7 * name.hashCode() + 11 * rank.hashCode();
     }
 
 }

@@ -8,7 +8,6 @@ package com.omsu.cherepanov.Clients;
 import java.util.HashSet;
 
 /**
- *
  * @author Павел
  */
 public class Construction extends Mainclient {
@@ -22,8 +21,7 @@ public class Construction extends Mainclient {
         staff = new HashSet<People>();
     }
 
-    public Construction(String newName, int newX, int newY) {
-        super(newX, newY);
+    public Construction(String newName) {
         name = newName;
         staff = new HashSet<People>();
         //staff = new HashSet();

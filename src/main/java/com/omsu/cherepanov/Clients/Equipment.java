@@ -5,14 +5,21 @@
  */
 package com.omsu.cherepanov.Clients;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
- *
  * @author Павел
  */
+@Entity
+@Table(name = "equipment")
 public class Equipment {
 
     private String type;
     private String identifier;
+    @Id
     private int equipmentID;
 
     public Equipment() {
@@ -59,7 +66,7 @@ public class Equipment {
 
     @Override
     public int hashCode() {
-        return 7*equipmentID + 11*type.hashCode() + 13*identifier.hashCode();
+        return 7 * equipmentID + 11 * type.hashCode() + 13 * identifier.hashCode();
     }
 
 }
