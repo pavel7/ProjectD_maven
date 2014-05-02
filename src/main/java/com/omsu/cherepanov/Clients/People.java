@@ -19,8 +19,8 @@ public class People extends Mainclient {
         rank = "";
     }
 
-    public People(String newName, Coordinates newPoint, String newRank) {
-        super(newPoint.getX(), newPoint.getY());
+    public People(String newName, String newRank) {
+        super();
         name = newName;
         rank = newRank;
     }

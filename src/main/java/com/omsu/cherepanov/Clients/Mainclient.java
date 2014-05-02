@@ -5,36 +5,32 @@
  */
 package com.omsu.cherepanov.Clients;
 
+
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * @author Павел
  */
-@Entity
+@DynamicUpdate
 @Table(name = "mainclient")
 public class Mainclient {
 
-    @Id
     private int objectID;
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "Status_idStatus")
     private ObjectStatus isStatus;
-    @Column(name = "xPoint")
     private double pointX;
-    @Column(name = "yPoint")
     private double pointY;
-    @ManyToMany
-    @JoinTable(name="mainclientequ",joinColumns={@JoinColumn(name="Mainclient_objectID")},inverseJoinColumns={@JoinColumn(name="Amount")})
-    @MapKeyJoinColumn(name="Equipment_EquipmentID")
-    private HashMap<Equipment, Integer> equipment;
+    private List<MainclientEquipment> equipment = new ArrayList<MainclientEquipment>(0);
 
     public Mainclient() {
         objectID = 0;
         isStatus = ObjectStatus.isAlive;
         pointX = 0;
         pointY = 0;
-        equipment = new HashMap<Equipment, Integer>();
     }
 
     public Mainclient(double newX, double newY, int newID) {
@@ -42,17 +38,18 @@ public class Mainclient {
         isStatus = ObjectStatus.isAlive;
         pointX = newX;
         pointY = newY;
-        equipment = new HashMap<Equipment, Integer>();
     }
 
     public void setObjectID(int ID) {
         objectID = ID;
     }
 
+    @Id
     public int getObjectID() {
         return objectID;
     }
 
+    @Column(name = "xPoint")
     public double getPointX() {
         return pointX;
     }
@@ -61,6 +58,7 @@ public class Mainclient {
         this.pointX = pointX;
     }
 
+    @Column(name = "yPoint")
     public double getPointY() {
         return pointY;
     }
@@ -69,6 +67,8 @@ public class Mainclient {
         this.pointY = pointY;
     }
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "Status_idStatus")
     public ObjectStatus getStatus() {
         return isStatus;
     }
@@ -77,36 +77,62 @@ public class Mainclient {
         isStatus = newStatus;
     }
 
-    public HashMap<Equipment, Integer> getEquipment() {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            targetEntity = MainclientEquipment.class, mappedBy = "MainclientEquipmentID.mainclient")
+    public List<MainclientEquipment> getEquipment() {
         return equipment;
     }
 
-    public void setEquipment(HashMap<Equipment, Integer> equipment) {
+    public void setEquipment(List<MainclientEquipment> equipment) {
         this.equipment = equipment;
     }
 
-    public void addEquipment(Equipment newEquipment, int newAmount) {
-        if (equipment.containsKey(newEquipment)) {
-            if (equipment.get(newEquipment) != null) {
-                int temp = equipment.get(newEquipment);
-                equipment.remove(newEquipment);
-                equipment.put(newEquipment, newAmount + temp);
-            } else {
-                equipment.remove(newEquipment);
-                equipment.put(newEquipment, newAmount);
+    public void addEquipment(Equipment newEquipment, int Amount) {
+//        newMainclientEquipment (equipmentAmount.contains(newMainclientEquipment)) {
+//            int indexOfCurrentElem = equipmentAmount.indexOf(newMainclientEquipment);
+//            if (equipmentAmount.ge= null) {
+//                int temp = equipment.get(newEquipment);
+//                equipment.remove(newEquipment);
+//                equipment.put(newEquipment, newAmount + temp);
+//            } else {
+//                equipment.remove(newEquipment);
+//                equipment.put(newEquipment, newAmount);
+//            }
+//
+//        } else {
+//            equipment.put(newEquipment, newAmount);
+//        }
+        int indexOfElem = -1;
+        for (int i = 0; i < equipment.size(); i++) {
+            if (equipment.get(i).getMainclientEquipmentID().getEquipment().equals(newEquipment)) {
+                indexOfElem = i;
+                break;
             }
-
+        }
+        if (indexOfElem != -1) {
+            int prevAmount = equipment.get(indexOfElem).getAmount();
+            equipment.get(indexOfElem).setAmount(prevAmount + Amount);
         } else {
-            equipment.put(newEquipment, newAmount);
+            MainclientEquipment newMainclientEquipment = new MainclientEquipment();
+            newMainclientEquipment.getMainclientEquipmentID().setEquipment(newEquipment);
+            newMainclientEquipment.getMainclientEquipmentID().setMainclient(this);
+            newMainclientEquipment.setAmount(Amount);
         }
     }
 
-    public HashMap getAllEquipment() {
+    public List getAllEquipment() {
         return equipment;
     }
 
-    public int getEquipment(Equipment curEquipment) {
-        return equipment.get(curEquipment);
+    public int getEquipmentAmount(Equipment curEquipment) {
+        int equipmentAmount = -1;
+        for (int i = 0; i < equipment.size(); i++) {
+            if (equipment.get(i).getMainclientEquipmentID().getEquipment().equals(curEquipment)) {
+                equipmentAmount = equipment.get(i).getAmount();
+                break;
+            }
+        }
+        return equipmentAmount;
     }
 
     public void removeAllEquipment() {
@@ -114,7 +140,16 @@ public class Mainclient {
     }
 
     public void removeEquipment(Equipment curEquipment) {
-        equipment.remove(curEquipment);
+        int indexOfElem = -1;
+        for (int i = 0; i < equipment.size(); i++) {
+            if (equipment.get(i).getMainclientEquipmentID().getEquipment().equals(curEquipment)) {
+                indexOfElem = i;
+                break;
+            }
+        }
+        if (indexOfElem != -1) {
+            equipment.remove(indexOfElem);
+        }
     }
 
     @Override
@@ -145,7 +180,7 @@ public class Mainclient {
 
     @Override
     public int hashCode() {
-        return 7 * objectID + 11 * isStatus.hashCode() + 13 * (int)pointX+ 17 * (int)pointY + 19 * equipment.hashCode();
+        return 7 * objectID + 11 * isStatus.hashCode() + 13 * (int) pointX + 17 * (int) pointY + 19 * equipment.hashCode();
     }
 
 }

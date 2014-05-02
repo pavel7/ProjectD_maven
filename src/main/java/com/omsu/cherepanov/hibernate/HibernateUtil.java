@@ -1,4 +1,4 @@
-package com.omsu.cherepanov.hybernate;
+package com.omsu.cherepanov.hibernate;
 
 /**
  * Created by Павел on 23.04.2014.

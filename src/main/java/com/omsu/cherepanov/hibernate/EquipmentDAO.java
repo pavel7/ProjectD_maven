@@ -1,4 +1,4 @@
-package com.omsu.cherepanov.hybernate;
+package com.omsu.cherepanov.hibernate;
 
 import com.omsu.cherepanov.Clients.Equipment;
 import org.hibernate.HibernateException;

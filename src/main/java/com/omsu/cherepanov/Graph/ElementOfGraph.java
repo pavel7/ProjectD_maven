@@ -18,7 +18,7 @@ public class ElementOfGraph implements Cloneable {
     private Connection edge;
     private final static byte initialDefenceMin = 0;
     private final static byte initialDefenceMax = 100;
-    private final static Mainclient deadClient = new Mainclient(0, 0);
+    private final static Mainclient deadClient = new Mainclient(0, 0, 999);
     private final static Connection destroyedConnection = new Connection(initialDefenceMin, 20);
     private final static Connection selfConnection = new Connection(initialDefenceMax, 21);
 

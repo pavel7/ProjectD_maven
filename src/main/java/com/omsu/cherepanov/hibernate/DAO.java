@@ -1,15 +1,15 @@
-package com.omsu.cherepanov.hybernate;
+package com.omsu.cherepanov.hibernate;
 
 /**
  * Created by Павел on 21.04.2014.
  */
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author seostella.com

@@ -6,9 +6,8 @@
 package com.omsu.cherepanov.Clients;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Павел
@@ -69,4 +68,15 @@ public class Equipment {
         return 7 * equipmentID + 11 * type.hashCode() + 13 * identifier.hashCode();
     }
 
+    @Override
+    public boolean equals(Object otherEquipment) {
+        if (this == otherEquipment)
+            return true;
+        if (otherEquipment == null)
+            return false;
+        if (getClass() != otherEquipment.getClass())
+            return false;
+        Equipment other = (Equipment) otherEquipment;
+        return this.getEquipmentID() == other.getEquipmentID();
+    }
 }

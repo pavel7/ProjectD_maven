@@ -1,11 +1,10 @@
-package com.omsu.cherepanov.hybernate;
+package com.omsu.cherepanov.hibernate;
 
 /**
  * Created by Павел on 24.04.2014.
  */
 
 import com.omsu.cherepanov.Connection.Connection;
-import org.hibernate.Query;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 

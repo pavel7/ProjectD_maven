@@ -9,6 +9,7 @@ import com.omsu.cherepanov.Clients.ObjectStatus;
 
 import javax.persistence.*;
 
+
 /**
  * @author Павел
  */
