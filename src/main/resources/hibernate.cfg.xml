@@ -20,5 +20,6 @@
         <mapping class="com.omsu.cherepanov.Clients.Mainclient"/>
         <mapping class="com.omsu.cherepanov.Clients.MainclientEquipment"/>
         <mapping class="com.omsu.cherepanov.Clients.MainclientEquipmentID"/>
+        <mapping class="com.omsu.cherepanov.Clients.People"/>
     </session-factory>
 </hibernate-configuration>

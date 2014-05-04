@@ -7,7 +7,7 @@ import org.hibernate.Query;
 /**
  * Created by Павел on 05.05.2014.
  */
-public class PeopleDAO extends DAO{
+public class PeopleDAO extends DAO {
 
     public People createPeople(double newX, double newY, int newID, String newName, String newRank)
             throws Exception {

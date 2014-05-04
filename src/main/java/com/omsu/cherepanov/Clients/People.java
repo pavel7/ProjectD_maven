@@ -5,14 +5,17 @@
  */
 package com.omsu.cherepanov.Clients;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 /**
  * @author Павел
  */
 @Entity
 @Table(name = "people")
-@PrimaryKeyJoinColumn(name="Mainclient_objectID", referencedColumnName="objectID")
+@PrimaryKeyJoinColumn(name = "Mainclient_objectID", referencedColumnName = "objectID")
 public class People extends Mainclient {
 
     private String name;
