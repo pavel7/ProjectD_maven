@@ -5,9 +5,6 @@
  */
 package com.omsu.cherepanov.Clients;
 
-
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.List;
 /**
  * @author Павел
  */
-@DynamicUpdate
+@Entity
 @Table(name = "mainclient")
 public class Mainclient {
 
@@ -69,16 +66,16 @@ public class Mainclient {
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "Status_idStatus")
-    public ObjectStatus getStatus() {
+    public ObjectStatus getIsStatus() {
         return isStatus;
     }
 
-    public void setStatus(ObjectStatus newStatus) {
+    public void setIsStatus(ObjectStatus newStatus) {
         isStatus = newStatus;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            targetEntity = MainclientEquipment.class, mappedBy = "MainclientEquipmentID.mainclient")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+            targetEntity = MainclientEquipment.class, mappedBy = "mainclient")
     public List<MainclientEquipment> getEquipment() {
         return equipment;
     }
@@ -104,7 +101,7 @@ public class Mainclient {
 //        }
         int indexOfElem = -1;
         for (int i = 0; i < equipment.size(); i++) {
-            if (equipment.get(i).getMainclientEquipmentID().getEquipment().equals(newEquipment)) {
+            if (equipment.get(i).getEquipment().equals(newEquipment)) {
                 indexOfElem = i;
                 break;
             }
@@ -114,20 +111,21 @@ public class Mainclient {
             equipment.get(indexOfElem).setAmount(prevAmount + Amount);
         } else {
             MainclientEquipment newMainclientEquipment = new MainclientEquipment();
-            newMainclientEquipment.getMainclientEquipmentID().setEquipment(newEquipment);
-            newMainclientEquipment.getMainclientEquipmentID().setMainclient(this);
+            MainclientEquipmentID newMainclientEquipmentID = new MainclientEquipmentID();
+            newMainclientEquipmentID.setEquipmentID(newEquipment.getEquipmentID());
+            newMainclientEquipmentID.setMainclientID(this.getObjectID());
+            newMainclientEquipment.setEquipment(newEquipment);
+            newMainclientEquipment.setMainclient(this);
+            newMainclientEquipment.setMainclientEquipmentID(newMainclientEquipmentID);
             newMainclientEquipment.setAmount(Amount);
+            equipment.add(newMainclientEquipment);
         }
-    }
-
-    public List getAllEquipment() {
-        return equipment;
     }
 
     public int getEquipmentAmount(Equipment curEquipment) {
         int equipmentAmount = -1;
         for (int i = 0; i < equipment.size(); i++) {
-            if (equipment.get(i).getMainclientEquipmentID().getEquipment().equals(curEquipment)) {
+            if (equipment.get(i).getEquipment().equals(curEquipment)) {
                 equipmentAmount = equipment.get(i).getAmount();
                 break;
             }
@@ -142,7 +140,7 @@ public class Mainclient {
     public void removeEquipment(Equipment curEquipment) {
         int indexOfElem = -1;
         for (int i = 0; i < equipment.size(); i++) {
-            if (equipment.get(i).getMainclientEquipmentID().getEquipment().equals(curEquipment)) {
+            if (equipment.get(i).getEquipment().equals(curEquipment)) {
                 indexOfElem = i;
                 break;
             }
@@ -168,14 +166,6 @@ public class Mainclient {
             return false;
         }
         return true;
-    }
-
-    public ObjectStatus getIsStatus() {
-        return isStatus;
-    }
-
-    public void setIsStatus(ObjectStatus isStatus) {
-        this.isStatus = isStatus;
     }
 
     @Override

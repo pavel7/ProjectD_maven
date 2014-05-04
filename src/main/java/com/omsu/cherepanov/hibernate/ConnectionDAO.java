@@ -33,7 +33,7 @@ public class ConnectionDAO extends DAO {
             throws Exception {
         try {
             begin();
-            getSession().save(connection);
+            getSession().saveOrUpdate(connection);
             commit();
         } catch (HibernateException e) {
             rollback();
@@ -46,7 +46,7 @@ public class ConnectionDAO extends DAO {
     public Connection retrieveConnection(int id) throws Exception {
         try {
             begin();
-            Query q = getSession().createQuery("from connection where objectID = :id");
+            Query q = getSession().createQuery("from Connection where objectID = :id");
             q.setInteger("id", id);
             Connection newConnection = (Connection) q.uniqueResult();
             commit();

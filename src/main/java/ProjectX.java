@@ -4,8 +4,10 @@ import com.omsu.cherepanov.Clients.Mainclient;
 import com.omsu.cherepanov.Connection.Connection;
 import com.omsu.cherepanov.Graph.DirectedGraph;
 import com.omsu.cherepanov.Graph.ElementOfGraph;
+import com.omsu.cherepanov.hibernate.ConnectionDAO;
 import com.omsu.cherepanov.hibernate.EquipmentDAO;
 import com.omsu.cherepanov.hibernate.HibernateUtil;
+import com.omsu.cherepanov.hibernate.MainclientDAO;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -121,11 +123,20 @@ public class ProjectX {
         Iterator testt = test200.getIteratorOfElem(0);
         int[] path = temp11.pathFromTo();
 
+        ConnectionDAO connectionDAO = new ConnectionDAO();
         Equipment test5555 = new Equipment("qwe", "qwe", 1);
-        EquipmentDAO userDAO = new EquipmentDAO();
-
+        MainclientDAO userDAO = new MainclientDAO();
+        Mainclient ttt = new Mainclient(1, 1, 2);
+        ttt.addEquipment(test5555, 5);
+        EquipmentDAO testDAO = new EquipmentDAO();
         try {
-            userDAO.createEquipment("qwe", "qwe", 1011);
+            //connectionDAO.saveConnection(testC20);
+            //userDAO.createEquipment("qwe", "qwe", 1011);
+            //testDAO.createEquipment("4","4",4);
+            //Mainclient t1 = userDAO.retrieveMainclient(2);
+            //Equipment test442 = testDAO.retrieveEquipment("qwe", "qwe");
+            //Connection newCon1 = connectionDAO.retrieveConnection(13);
+            userDAO.saveMainclient(ttt);
             System.out.print("1");
 
         } catch (Exception e) {

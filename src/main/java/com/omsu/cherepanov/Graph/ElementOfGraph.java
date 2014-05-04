@@ -23,7 +23,7 @@ public class ElementOfGraph implements Cloneable {
     private final static Connection selfConnection = new Connection(initialDefenceMax, 21);
 
     static {
-        deadClient.setStatus(ObjectStatus.isDead);
+        deadClient.setIsStatus(ObjectStatus.isDead);
         destroyedConnection.setStatus(ObjectStatus.isDead);
     }
 

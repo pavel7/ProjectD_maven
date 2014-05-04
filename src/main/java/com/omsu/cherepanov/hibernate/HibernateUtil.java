@@ -17,7 +17,7 @@ public class HibernateUtil {
             // Create the SessionFactory from hibernate.cfg.xml
             Configuration configuration = new Configuration();
             configuration.configure();
-            return configuration.buildSessionFactory(
+            return configuration.setProperty("hibernate.show_sql", "true").buildSessionFactory(
                     new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build());
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed

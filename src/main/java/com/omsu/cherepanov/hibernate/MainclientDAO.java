@@ -24,14 +24,28 @@ public class MainclientDAO extends DAO {
         }
     }
 
+    public void saveMainclient(Mainclient mainclient)
+            throws Exception {
+        try {
+            begin();
+            getSession().saveOrUpdate(mainclient);
+            commit();
+        } catch (HibernateException e) {
+            rollback();
+            throw new Exception("Could not create Mainclient ID:" + mainclient.getObjectID(), e);
+        } finally {
+            close();
+        }
+    }
+
     public Mainclient retrieveMainclient(int newID) throws Exception {
         try {
             begin();
-            Query q = getSession().createQuery("from mainclient where ObjectID = :newID");
+            Query q = getSession().createQuery("from Mainclient where objectID = :newID");
             q.setInteger("newID", newID);
             Mainclient mainclient = (Mainclient) q.uniqueResult();
-            Query q1 = getSession().createQuery("from mainclientequ where Mainclient_ObjectID = :newID");
-            q1.setInteger("newID", newID);
+            //Query q1 = getSession().createQuery("from mainclientequ where Mainclient_ObjectID = :newID");
+            //q1.setInteger("newID", newID);
             commit();
             return mainclient;
         } catch (HibernateException e) {

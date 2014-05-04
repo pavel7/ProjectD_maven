@@ -14,7 +14,7 @@ public class EquipmentDAO extends DAO {
         try {
             begin();
             Equipment equipment = new Equipment(type, identifier, newEquipmentID);
-            getSession().save(equipment);
+            getSession().saveOrUpdate(equipment);
             commit();
             return equipment;
         } catch (HibernateException e) {
@@ -25,10 +25,24 @@ public class EquipmentDAO extends DAO {
         }
     }
 
+    public void saveEquipment(Equipment equipment)
+            throws Exception {
+        try {
+            begin();
+            getSession().saveOrUpdate(equipment);
+            commit();
+        } catch (HibernateException e) {
+            rollback();
+            throw new Exception("Could not create Equipment Type:" + equipment.getType() + ", Identifier:" + equipment.getIdentifier(), e);
+        } finally {
+            close();
+        }
+    }
+
     public Equipment retrieveEquipment(String type, String identifier) throws Exception {
         try {
             begin();
-            Query q = getSession().createQuery("from equipment where Type = :type AND Identifier = :identifier");
+            Query q = getSession().createQuery("from Equipment where type = :type AND identifier = :identifier");
             q.setString("type", type);
             q.setString("identifier", identifier);
             Equipment equipment = (Equipment) q.uniqueResult();
