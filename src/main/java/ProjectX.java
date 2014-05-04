@@ -1,13 +1,11 @@
 import com.omsu.cherepanov.Algorithms.Dijkstra;
 import com.omsu.cherepanov.Clients.Equipment;
 import com.omsu.cherepanov.Clients.Mainclient;
+import com.omsu.cherepanov.Clients.People;
 import com.omsu.cherepanov.Connection.Connection;
 import com.omsu.cherepanov.Graph.DirectedGraph;
 import com.omsu.cherepanov.Graph.ElementOfGraph;
-import com.omsu.cherepanov.hibernate.ConnectionDAO;
-import com.omsu.cherepanov.hibernate.EquipmentDAO;
-import com.omsu.cherepanov.hibernate.HibernateUtil;
-import com.omsu.cherepanov.hibernate.MainclientDAO;
+import com.omsu.cherepanov.hibernate.*;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -129,6 +127,8 @@ public class ProjectX {
         Mainclient ttt = new Mainclient(1, 1, 2);
         ttt.addEquipment(test5555, 5);
         EquipmentDAO testDAO = new EquipmentDAO();
+        PeopleDAO peopleDAO = new PeopleDAO();
+        People testPeople = new People(1, 2, 7, "test", "XYI");
         try {
             //connectionDAO.saveConnection(testC20);
             //userDAO.createEquipment("qwe", "qwe", 1011);
@@ -136,7 +136,8 @@ public class ProjectX {
             //Mainclient t1 = userDAO.retrieveMainclient(2);
             //Equipment test442 = testDAO.retrieveEquipment("qwe", "qwe");
             //Connection newCon1 = connectionDAO.retrieveConnection(13);
-            userDAO.saveMainclient(ttt);
+            //userDAO.saveMainclient(ttt);
+            peopleDAO.savePeople(testPeople);
             System.out.print("1");
 
         } catch (Exception e) {

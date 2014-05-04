@@ -8,12 +8,13 @@ import org.hibernate.Query;
  * Created by Павел on 29.04.2014.
  */
 public class MainclientDAO extends DAO {
+
     public Mainclient createMainclient(double newX, double newY, int newID)
             throws Exception {
         try {
             begin();
             Mainclient mainclient = new Mainclient(newX, newY, newID);
-            getSession().save(mainclient);
+            getSession().saveOrUpdate(mainclient);
             commit();
             return mainclient;
         } catch (HibernateException e) {

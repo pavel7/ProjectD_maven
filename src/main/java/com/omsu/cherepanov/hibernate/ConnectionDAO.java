@@ -18,7 +18,7 @@ public class ConnectionDAO extends DAO {
         try {
             begin();
             Connection connection = new Connection(newDefence, id);
-            getSession().save(connection);
+            getSession().saveOrUpdate(connection);
             commit();
             return connection;
         } catch (HibernateException e) {

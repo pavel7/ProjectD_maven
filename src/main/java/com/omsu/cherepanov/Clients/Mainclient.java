@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "mainclient")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Mainclient {
 
     private int objectID;

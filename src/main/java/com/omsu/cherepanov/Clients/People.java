@@ -5,9 +5,14 @@
  */
 package com.omsu.cherepanov.Clients;
 
+import javax.persistence.*;
+
 /**
  * @author Павел
  */
+@Entity
+@Table(name = "people")
+@PrimaryKeyJoinColumn(name="Mainclient_objectID", referencedColumnName="objectID")
 public class People extends Mainclient {
 
     private String name;
@@ -25,6 +30,13 @@ public class People extends Mainclient {
         rank = newRank;
     }
 
+    public People(double newX, double newY, int newID, String newName, String newRank) {
+        super(newX, newY, newID);
+        name = newName;
+        rank = newRank;
+    }
+
+    @Column(name = "Name")
     public String getName() {
         return name;
     }
@@ -33,6 +45,7 @@ public class People extends Mainclient {
         this.name = name;
     }
 
+    @Column(name = "Rank")
     public String getRank() {
         return rank;
     }
