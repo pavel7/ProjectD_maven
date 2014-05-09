@@ -5,7 +5,8 @@
  */
 package com.omsu.cherepanov.Clients;
 
-import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @author Павел
@@ -13,25 +14,23 @@ import java.util.HashSet;
 public class Construction extends Mainclient {
 
     private String name;
-    private HashSet<People> staff;
+    private List<People> staff = new ArrayList<People>(0);
 
     public Construction() {
         super();
         name = "";
-        staff = new HashSet<People>();
     }
 
     public Construction(String newName) {
         name = newName;
-        staff = new HashSet<People>();
         //staff = new HashSet();
     }
 
-    public void setStaff(HashSet<People> staff) {
+    public void setStaff(List<People> staff) {
         this.staff = staff;
     }
 
-    public HashSet<People> getStaff() {
+    public List<People> getStaff() {
 
         return staff;
     }
@@ -45,15 +44,15 @@ public class Construction extends Mainclient {
     }
 
     public void addStaff(People newPeople) {
-        staff.add(newPeople);
+        this.staff.add(newPeople);
     }
 
     public void removeStaff(People curPeople) {
-        staff.remove(curPeople);
+        this.staff.remove(curPeople);
     }
 
     public void removeAllStaff() {
-        staff.clear();
+        this.staff.clear();
     }
 
 }
