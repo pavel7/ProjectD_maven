@@ -1,4 +1,5 @@
 import com.omsu.cherepanov.Algorithms.Dijkstra;
+import com.omsu.cherepanov.Clients.Construction;
 import com.omsu.cherepanov.Clients.Equipment;
 import com.omsu.cherepanov.Clients.Mainclient;
 import com.omsu.cherepanov.Clients.People;
@@ -129,6 +130,15 @@ public class ProjectX {
         EquipmentDAO testDAO = new EquipmentDAO();
         PeopleDAO peopleDAO = new PeopleDAO();
         People testPeople = new People(1, 2, 7, "test", "XYI");
+        People testPeople1 = new People(1, 3.5, 4, "test1", "XYI1");
+        Construction testConstruction = new Construction("test");
+        testConstruction.setObjectID(77);
+        testConstruction.setPointX(1.4);
+        testConstruction.setPointY(3.4);
+        testPeople.addEquipment(test5555,5);
+        testConstruction.addStaff(testPeople);
+        testConstruction.addStaff(testPeople1);
+        ConstructionDAO constructionDAO = new ConstructionDAO();
         try {
             //connectionDAO.saveConnection(testC20);
             //userDAO.createEquipment("qwe", "qwe", 1011);
@@ -137,7 +147,8 @@ public class ProjectX {
             //Equipment test442 = testDAO.retrieveEquipment("qwe", "qwe");
             //Connection newCon1 = connectionDAO.retrieveConnection(13);
             //userDAO.saveMainclient(ttt);
-            peopleDAO.savePeople(testPeople);
+            //peopleDAO.savePeople(testPeople);
+            constructionDAO.saveConstruction(testConstruction);
             System.out.print("1");
 
         } catch (Exception e) {

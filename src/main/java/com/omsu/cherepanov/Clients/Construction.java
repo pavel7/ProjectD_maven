@@ -5,12 +5,17 @@
  */
 package com.omsu.cherepanov.Clients;
 
-import java.util.List;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Павел
  */
+
+@Entity
+@Table(name = "construction")
+@PrimaryKeyJoinColumn(name = "Mainclient_objectID", referencedColumnName = "objectID")
 public class Construction extends Mainclient {
 
     private String name;
@@ -30,6 +35,8 @@ public class Construction extends Mainclient {
         this.staff = staff;
     }
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "construction_people", joinColumns = @JoinColumn(name = "Construction_Mainclient_objectID"), inverseJoinColumns = @JoinColumn(name = "People_Mainclient_objectID"))
     public List<People> getStaff() {
 
         return staff;
