@@ -21,7 +21,7 @@ public class Connection {
     private int objectID;
     private byte defence;
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "Status_idStatus")
+    @Column(name = "Status_IdStatus")
     private ObjectStatus isStatus;
 
     public Connection() {
@@ -91,7 +91,7 @@ public class Connection {
 
     @Override
     public int hashCode() {
-        return 7 * objectID + 11 * defence + 13 * isStatus.hashCode();
+        return 7 * objectID + 11 * defence + 13 * this.getIsStatus().toString().hashCode();
     }
 
 }

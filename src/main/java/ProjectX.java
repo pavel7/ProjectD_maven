@@ -1,4 +1,3 @@
-import com.omsu.cherepanov.Algorithms.Dijkstra;
 import com.omsu.cherepanov.Clients.Construction;
 import com.omsu.cherepanov.Clients.Equipment;
 import com.omsu.cherepanov.Clients.Mainclient;
@@ -6,10 +5,10 @@ import com.omsu.cherepanov.Clients.People;
 import com.omsu.cherepanov.Connection.Connection;
 import com.omsu.cherepanov.Graph.DirectedGraph;
 import com.omsu.cherepanov.Graph.ElementOfGraph;
+import com.omsu.cherepanov.Graph.VertexConnection;
 import com.omsu.cherepanov.hibernate.*;
 
 import java.util.HashMap;
-import java.util.Iterator;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -53,9 +52,9 @@ public class ProjectX {
 //        System.out.println(testE.equals(testE1));
 //        System.out.println(testE1.equals(testE));
 //        System.out.println(testE1.equals(null));
-        ElementOfGraph test2 = new ElementOfGraph(test, testC);
-        ElementOfGraph test3 = new ElementOfGraph(test1, testC1);
-        ElementOfGraph test4 = new ElementOfGraph(test1, testC);
+//        ElementOfGraph test2 = new ElementOfGraph(test, testC);
+//        ElementOfGraph test3 = new ElementOfGraph(test1, testC1);
+//        ElementOfGraph test4 = new ElementOfGraph(test1, testC);
         ElementOfGraph test5 = new ElementOfGraph();
         Connection testC2 = new Connection((byte) 90, 3);
 //        DirectedGraph test12=new DirectedGraph(2);
@@ -85,42 +84,42 @@ public class ProjectX {
         Connection testC18 = new Connection((byte) 40, 11);
         Connection testC19 = new Connection((byte) 45, 12);//changes
         Connection testC20 = new Connection((byte) 100, 13);
-        ElementOfGraph tes1 = new ElementOfGraph(test10);
-        ElementOfGraph tes2 = new ElementOfGraph(test11);
-        ElementOfGraph tes3 = new ElementOfGraph(test12);
-        ElementOfGraph tes4 = new ElementOfGraph(test13);
-        ElementOfGraph tes5 = new ElementOfGraph(test14);
-        ElementOfGraph tes6 = new ElementOfGraph(test15);
+//        ElementOfGraph tes1 = new ElementOfGraph(test10);
+//        ElementOfGraph tes2 = new ElementOfGraph(test11);
+//        ElementOfGraph tes3 = new ElementOfGraph(test12);
+//        ElementOfGraph tes4 = new ElementOfGraph(test13);
+//        ElementOfGraph tes5 = new ElementOfGraph(test14);
+//        ElementOfGraph tes6 = new ElementOfGraph(test15);
         DirectedGraph test200 = new DirectedGraph(2);
-        test200.addVertex(tes1);
-        test200.addVertex(tes2);
-        test200.addVertex(tes3);
-        test200.addVertex(tes4);
-        test200.addVertex(tes5);
-        test200.addVertex(tes6);
-        ElementOfGraph tes21 = new ElementOfGraph(test11, testC12);
-        test200.addVertexToVertex(tes1, tes21);
-        ElementOfGraph tes31 = new ElementOfGraph(test12, testC11);
-        test200.addVertexToVertex(tes1, tes31);
-        ElementOfGraph tes41 = new ElementOfGraph(test13, testC13);
-        test200.addVertexToVertex(tes1, tes41);
-        ElementOfGraph tes42 = new ElementOfGraph(test13, testC15);
-        test200.addVertexToVertex(tes2, tes42);
-        ElementOfGraph tes43 = new ElementOfGraph(test13, testC16);
-        test200.addVertexToVertex(tes3, tes43);
-        ElementOfGraph tes52 = new ElementOfGraph(test14, testC14);
-        test200.addVertexToVertex(tes2, tes52);
-        ElementOfGraph tes53 = new ElementOfGraph(test14, testC20);
-        test200.addVertexToVertex(tes3, tes53);
-        ElementOfGraph tes63 = new ElementOfGraph(test15, testC18);
-        test200.addVertexToVertex(tes3, tes63);
-        ElementOfGraph tes64 = new ElementOfGraph(test15, testC17);
-        test200.addVertexToVertex(tes4, tes64);
-        ElementOfGraph tes65 = new ElementOfGraph(test15, testC19);
-        test200.addVertexToVertex(tes5, tes65);
-        Dijkstra temp11 = new Dijkstra(test200, test10, test15);
-        Iterator testt = test200.getIteratorOfElem(0);
-        int[] path = temp11.pathFromTo();
+//        test200.addVertex(tes1);
+//        test200.addVertex(tes2);
+//        test200.addVertex(tes3);
+//        test200.addVertex(tes4);
+//        test200.addVertex(tes5);
+//        test200.addVertex(tes6);
+//        ElementOfGraph tes21 = new ElementOfGraph(test11, testC12);
+//        test200.addVertexToVertex(tes1, tes21);
+//        ElementOfGraph tes31 = new ElementOfGraph(test12, testC11);
+//        test200.addVertexToVertex(tes1, tes31);
+//        ElementOfGraph tes41 = new ElementOfGraph(test13, testC13);
+//        test200.addVertexToVertex(tes1, tes41);
+//        ElementOfGraph tes42 = new ElementOfGraph(test13, testC15);
+//        test200.addVertexToVertex(tes2, tes42);
+//        ElementOfGraph tes43 = new ElementOfGraph(test13, testC16);
+//        test200.addVertexToVertex(tes3, tes43);
+//        ElementOfGraph tes52 = new ElementOfGraph(test14, testC14);
+//        test200.addVertexToVertex(tes2, tes52);
+//        ElementOfGraph tes53 = new ElementOfGraph(test14, testC20);
+//        test200.addVertexToVertex(tes3, tes53);
+//        ElementOfGraph tes63 = new ElementOfGraph(test15, testC18);
+//        test200.addVertexToVertex(tes3, tes63);
+//        ElementOfGraph tes64 = new ElementOfGraph(test15, testC17);
+//        test200.addVertexToVertex(tes4, tes64);
+//        ElementOfGraph tes65 = new ElementOfGraph(test15, testC19);
+//        test200.addVertexToVertex(tes5, tes65);
+//        Dijkstra temp11 = new Dijkstra(test200, test10, test15);
+//        Iterator testt = test200.getIteratorOfElem(0);
+//        int[] path = temp11.pathFromTo();
 
         ConnectionDAO connectionDAO = new ConnectionDAO();
         Equipment test5555 = new Equipment("qwe", "qwe", 1);
@@ -135,10 +134,18 @@ public class ProjectX {
         testConstruction.setObjectID(77);
         testConstruction.setPointX(1.4);
         testConstruction.setPointY(3.4);
-        testPeople.addEquipment(test5555,5);
+        testPeople.addEquipment(test5555, 5);
         testConstruction.addStaff(testPeople);
         testConstruction.addStaff(testPeople1);
         ConstructionDAO constructionDAO = new ConstructionDAO();
+        VertexConnectionDAO vertexConnectionDAO = new VertexConnectionDAO();
+        VertexConnection vertexConnection = new VertexConnection();
+        vertexConnection.setId(12);
+        vertexConnection.setMainclient(ttt);
+        vertexConnection.addVertex(ttt, testC11);
+        vertexConnection.addVertex(testPeople, testC12);
+        //ElementOfGraphDAO elementOfGraphDAO = new ElementOfGraphDAO();
+        // ElementOfGraph elementOfGraph = new ElementOfGraph(ttt, testC20, 515);
         try {
             //connectionDAO.saveConnection(testC20);
             //userDAO.createEquipment("qwe", "qwe", 1011);
@@ -148,7 +155,9 @@ public class ProjectX {
             //Connection newCon1 = connectionDAO.retrieveConnection(13);
             //userDAO.saveMainclient(ttt);
             //peopleDAO.savePeople(testPeople);
-            constructionDAO.saveConstruction(testConstruction);
+            //constructionDAO.saveConstruction(testConstruction);
+            //elementOfGraphDAO.saveElementOfGraph(elementOfGraph);
+            VertexConnection t1 = vertexConnectionDAO.retrieveVertexConnection(12);
             System.out.print("1");
 
         } catch (Exception e) {
@@ -157,9 +166,9 @@ public class ProjectX {
         System.out.print("1");
         Mainclient test151 = new Mainclient(0, 6, 8);
         Connection testC111 = new Connection((byte) 150, 14);
-        test200.addVertex(new ElementOfGraph(test151, testC111));
-        Dijkstra temp111 = new Dijkstra(test200, test10, test151);
-        int[] path1 = temp111.pathFromTo();
+        //test200.addVertex(new ElementOfGraph(test151, testC111));
+//        Dijkstra temp111 = new Dijkstra(test200, test10, test151);
+//        int[] path1 = temp111.pathFromTo();
         System.out.print("1");
         HibernateUtil.closeSession();
     }

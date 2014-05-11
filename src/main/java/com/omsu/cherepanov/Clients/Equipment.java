@@ -65,7 +65,7 @@ public class Equipment {
 
     @Override
     public int hashCode() {
-        return 7 * equipmentID + 11 * type.hashCode() + 13 * identifier.hashCode();
+        return 11 * type.hashCode() + 13 * identifier.hashCode();
     }
 
     @Override
@@ -77,6 +77,8 @@ public class Equipment {
         if (getClass() != otherEquipment.getClass())
             return false;
         Equipment other = (Equipment) otherEquipment;
-        return this.getEquipmentID() == other.getEquipmentID();
+        if (!this.getType().equals(other.getType())) return false;
+        if (!this.getIdentifier().equals(other.getIdentifier())) return false;
+        return true;
     }
 }

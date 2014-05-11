@@ -9,32 +9,12 @@ import java.io.Serializable;
  */
 @Embeddable
 public class MainclientEquipmentID implements Serializable {
-//    private Mainclient mainclient;
-//    private Equipment equipment;
-//
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    public Equipment getEquipment() {
-//        return equipment;
-//    }
-//
-//    public void setEquipment(Equipment equipment) {
-//        this.equipment = equipment;
-//    }
-//
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    public Mainclient getMainclient() {
-//        return mainclient;
-//    }
-//
-//    public void setMainclient(Mainclient mainclient) {
-//        this.mainclient = mainclient;
-//    }
 
-    private static final long serialVersionUID = -6437671620548733621L;
+    private static final long serialVersionUID = -7352732871315441553L;
     private int mainclientID;
     private int equipmentID;
 
-    @Column(name = "Mainclient_objectID")
+    @Column(name = "Mainclient_ObjectID")
     public int getMainclientID() {
         return mainclientID;
     }
@@ -50,5 +30,27 @@ public class MainclientEquipmentID implements Serializable {
 
     public void setEquipmentID(int equipmentID) {
         this.equipmentID = equipmentID;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        MainclientEquipmentID temp = (MainclientEquipmentID) obj;
+        if (this.getMainclientID() != temp.getMainclientID()) return false;
+        if (this.getEquipmentID() != temp.getEquipmentID()) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return 11 * mainclientID + 23 * equipmentID;
     }
 }

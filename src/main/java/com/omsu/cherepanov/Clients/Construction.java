@@ -15,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "construction")
-@PrimaryKeyJoinColumn(name = "Mainclient_objectID", referencedColumnName = "objectID")
+@PrimaryKeyJoinColumn(name = "Mainclient_ObjectID", referencedColumnName = "ObjectID")
 public class Construction extends Mainclient {
 
     private String name;
@@ -36,9 +36,8 @@ public class Construction extends Mainclient {
     }
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "construction_people", joinColumns = @JoinColumn(name = "Construction_Mainclient_objectID"), inverseJoinColumns = @JoinColumn(name = "People_Mainclient_objectID"))
+    @JoinTable(name = "construction_people", joinColumns = @JoinColumn(name = "Construction_Mainclient_ObjectID"), inverseJoinColumns = @JoinColumn(name = "People_Mainclient_ObjectID"))
     public List<People> getStaff() {
-
         return staff;
     }
 
@@ -60,6 +59,24 @@ public class Construction extends Mainclient {
 
     public void removeAllStaff() {
         this.staff.clear();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() * 7 + this.getName().hashCode() * 11 + this.getStaff().hashCode() * 13;
+    }
+
+    @Override
+    public boolean equals(Object otherEquipment) {
+        if (this == otherEquipment)
+            return true;
+        if (otherEquipment == null)
+            return false;
+        if (getClass() != otherEquipment.getClass())
+            return false;
+        Construction other = (Construction) otherEquipment;
+        if (this.getObjectID() != other.getObjectID()) return false;
+        return true;
     }
 
 }

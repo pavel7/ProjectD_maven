@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 /**
  * @author Павел
  */
-//добавления виртуальных целей
 public class DirectedGraph {
 
     private int amountOfVertex;
@@ -25,21 +24,25 @@ public class DirectedGraph {
     private static Connection selfEdge = new Connection(maxDefence, 0);
     private ArrayList<ArrayList<ElementOfGraph>> graph;
 
+    public DirectedGraph() {
+        amountOfEdge = 0;
+        graph = new ArrayList<ArrayList<ElementOfGraph>>();
+        this.amountOfVertex = 0;
+        for (int i = 0; i < amountOfVertex; i++) {
+            graph.add((ArrayList<ElementOfGraph>) new ArrayList());
+        }
+    }
+
+
     public DirectedGraph(int amountOfVertex) {
         if (amountOfVertex < 0) {
             throw new IllegalArgumentException("Number of vertices must be nonnegative");
         }
         this.amountOfVertex = amountOfVertex;
         amountOfEdge = 0;
-        //this.amountOfEdge = amountOfEdge;
         graph = new ArrayList<ArrayList<ElementOfGraph>>(amountOfVertex);
-        //graph = new ArrayList(amountOfVertex);
         for (int i = 0; i < amountOfVertex; i++) {
             graph.add((ArrayList<ElementOfGraph>) new ArrayList());
-//            for(int j = 0; j<graph.get(i).size();j++)
-//            {
-//                graph.get(i).set(j,new ArrayList<ElementOfGraph>());
-//            }
         }
     }
 

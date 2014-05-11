@@ -21,5 +21,9 @@
         <mapping class="com.omsu.cherepanov.Clients.MainclientEquipment"/>
         <mapping class="com.omsu.cherepanov.Clients.MainclientEquipmentID"/>
         <mapping class="com.omsu.cherepanov.Clients.People"/>
+        <mapping class="com.omsu.cherepanov.Clients.Construction"/>
+        <mapping class="com.omsu.cherepanov.Graph.ElementOfGraphID"/>
+        <mapping class="com.omsu.cherepanov.Graph.ElementOfGraph"/>
+        <mapping class="com.omsu.cherepanov.Graph.VertexConnection"/>
     </session-factory>
 </hibernate-configuration>

@@ -6,42 +6,51 @@
 package com.omsu.cherepanov.Graph;
 
 import com.omsu.cherepanov.Clients.Mainclient;
-import com.omsu.cherepanov.Clients.ObjectStatus;
 import com.omsu.cherepanov.Connection.Connection;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Павел
  */
-public class ElementOfGraph implements Cloneable {
+@Entity
+@Table(name = "elementofgraph")
+public class ElementOfGraph implements Cloneable, Serializable {
 
+    private static final long serialVersionUID = -277901234348581225L;
     private Mainclient vertex;
     private Connection edge;
-    private final static byte initialDefenceMin = 0;
-    private final static byte initialDefenceMax = 100;
-    private final static Mainclient deadClient = new Mainclient(0, 0, 999);
-    private final static Connection destroyedConnection = new Connection(initialDefenceMin, 20);
-    private final static Connection selfConnection = new Connection(initialDefenceMax, 21);
+    private VertexConnection vertexConnection;
+    private ElementOfGraphID elementOfGraphID;
+//    private final static byte initialDefenceMin = 0;
+//    private final static byte initialDefenceMax = 100;
+//    private final static Mainclient deadClient = new Mainclient(0, 0, 999);
+//    private final static Connection destroyedConnection = new Connection(initialDefenceMin, 20);
+//    private final static Connection selfConnection = new Connection(initialDefenceMax, 1);
+//
+//    static {
+//        deadClient.setIsStatus(ObjectStatus.isDead);
+//        destroyedConnection.setStatus(ObjectStatus.isDead);
+//    }
 
-    static {
-        deadClient.setIsStatus(ObjectStatus.isDead);
-        destroyedConnection.setStatus(ObjectStatus.isDead);
+//    public ElementOfGraph(Mainclient newVertex) {
+//        vertex = newVertex;
+//        edge = selfConnection;
+//    }
+
+    @EmbeddedId
+    public ElementOfGraphID getElementOfGraphID() {
+        return elementOfGraphID;
     }
 
-    public ElementOfGraph() {
-        vertex = deadClient;
-        edge = destroyedConnection;
+    public void setElementOfGraphID(ElementOfGraphID elementOfGraphID) {
+        this.elementOfGraphID = elementOfGraphID;
     }
 
-    public ElementOfGraph(Mainclient newVertex, Connection newEdge) {
-        vertex = newVertex;
-        edge = newEdge;
-    }
-
-    public ElementOfGraph(Mainclient newVertex) {
-        vertex = newVertex;
-        edge = selfConnection;
-    }
-
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "Mainclient_ObjectID")
+    @MapsId("mainclientID")
     public Mainclient getVertex() {
         return vertex;
     }
@@ -50,12 +59,26 @@ public class ElementOfGraph implements Cloneable {
         vertex = newVertex;
     }
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "Connection_ObjectID")
+    @MapsId("connectionID")
     public Connection getEdge() {
         return edge;
     }
 
     public void setEdge(Connection newEdge) {
         edge = newEdge;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "VertexConnection_Id")
+    @MapsId("vertexconnectionID")
+    public VertexConnection getVertexConnection() {
+        return vertexConnection;
+    }
+
+    public void setVertexConnection(VertexConnection vertexConnection) {
+        this.vertexConnection = vertexConnection;
     }
 
     @Override
@@ -78,7 +101,7 @@ public class ElementOfGraph implements Cloneable {
 
     @Override
     public int hashCode() {
-        return 7 * vertex.hashCode() + 11 * edge.hashCode();
+        return 7 * this.getEdge().hashCode() + 11 * this.getVertex().hashCode() + 19 * this.getElementOfGraphID().hashCode();
     }
 
     @Override

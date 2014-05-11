@@ -9,20 +9,16 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "mainclientequ")
-//@AssociationOverrides({
-//        @AssociationOverride(name = "mainclientEquipmentID.mainclient",
-//                joinColumns = @JoinColumn(name = "Mainclient_objectID")),
-//        @AssociationOverride(name = "mainclientEquipmentID.equipment",
-//                joinColumns = @JoinColumn(name = "Equipment_EquipmentID"))})
 public class MainclientEquipment implements Serializable {
 
+    private static final long serialVersionUID = 2272892761421567589L;
     private MainclientEquipmentID mainclientEquipmentID;
     private Mainclient mainclient;
     private Equipment equipment;
     private int amount;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "Mainclient_objectID")
+    @JoinColumn(name = "Mainclient_ObjectID")
     @MapsId("mainclientID")
     public Mainclient getMainclient() {
         return mainclient;
@@ -59,6 +55,30 @@ public class MainclientEquipment implements Serializable {
 
     public void setMainclientEquipmentID(MainclientEquipmentID mainclientEquipmentID) {
         this.mainclientEquipmentID = mainclientEquipmentID;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        MainclientEquipment temp = (MainclientEquipment) obj;
+        if (!this.getMainclientEquipmentID().equals(temp.getMainclientEquipmentID())) return false;
+        if (!this.getMainclient().equals(temp.getMainclient())) return false;
+        if (!this.getEquipment().equals(temp.getEquipment())) return false;
+        if (this.getAmount() != temp.getAmount()) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getAmount() * 7 + this.getEquipment().hashCode() * 11 + this.getMainclientEquipmentID().hashCode() * 13 + this.getMainclient().hashCode() * 17;
     }
 
 }

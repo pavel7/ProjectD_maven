@@ -15,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "people")
-@PrimaryKeyJoinColumn(name = "Mainclient_objectID", referencedColumnName = "objectID")
+@PrimaryKeyJoinColumn(name = "Mainclient_ObjectID", referencedColumnName = "ObjectID")
 public class People extends Mainclient {
 
     private String name;
@@ -59,7 +59,20 @@ public class People extends Mainclient {
 
     @Override
     public int hashCode() {
-        return 7 * name.hashCode() + 11 * rank.hashCode();
+        return super.hashCode() * 5 + 7 * name.hashCode() + 11 * rank.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object otherEquipment) {
+        if (this == otherEquipment)
+            return true;
+        if (otherEquipment == null)
+            return false;
+        if (getClass() != otherEquipment.getClass())
+            return false;
+        Construction other = (Construction) otherEquipment;
+        if (this.getObjectID() != other.getObjectID()) return false;
+        return true;
     }
 
 }

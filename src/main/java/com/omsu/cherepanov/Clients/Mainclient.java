@@ -66,7 +66,7 @@ public class Mainclient {
     }
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "Status_idStatus")
+    @Column(name = "Status_IdStatus")
     public ObjectStatus getIsStatus() {
         return isStatus;
     }
@@ -86,20 +86,6 @@ public class Mainclient {
     }
 
     public void addEquipment(Equipment newEquipment, int Amount) {
-//        newMainclientEquipment (equipmentAmount.contains(newMainclientEquipment)) {
-//            int indexOfCurrentElem = equipmentAmount.indexOf(newMainclientEquipment);
-//            if (equipmentAmount.ge= null) {
-//                int temp = equipment.get(newEquipment);
-//                equipment.remove(newEquipment);
-//                equipment.put(newEquipment, newAmount + temp);
-//            } else {
-//                equipment.remove(newEquipment);
-//                equipment.put(newEquipment, newAmount);
-//            }
-//
-//        } else {
-//            equipment.put(newEquipment, newAmount);
-//        }
         int indexOfElem = -1;
         for (int i = 0; i < equipment.size(); i++) {
             if (equipment.get(i).getEquipment().equals(newEquipment)) {
@@ -171,7 +157,7 @@ public class Mainclient {
 
     @Override
     public int hashCode() {
-        return 7 * objectID + 11 * isStatus.hashCode() + 13 * (int) pointX + 17 * (int) pointY + 19 * equipment.hashCode();
+        return 11 * this.getIsStatus().toString().hashCode() + 13 * (int) pointX + 17 * (int) pointY + 19 * this.getObjectID();
     }
 
 }
