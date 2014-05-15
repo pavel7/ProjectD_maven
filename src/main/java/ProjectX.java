@@ -140,7 +140,7 @@ public class ProjectX {
         ConstructionDAO constructionDAO = new ConstructionDAO();
         VertexConnectionDAO vertexConnectionDAO = new VertexConnectionDAO();
         VertexConnection vertexConnection = new VertexConnection();
-        vertexConnection.setId(12);
+        vertexConnection.setId(13);
         vertexConnection.setMainclient(ttt);
         vertexConnection.addVertex(ttt, testC11);
         vertexConnection.addVertex(testPeople, testC12);
