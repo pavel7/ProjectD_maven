@@ -1,5 +1,8 @@
 package com.omsu.cherepanov.Clients;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,13 +14,14 @@ import java.io.Serializable;
 @Table(name = "mainclientequ")
 public class MainclientEquipment implements Serializable {
 
-    private static final long serialVersionUID = 2272892761421567589L;
+    private static final long serialVersionUID = 4194674729380813963L;
     private MainclientEquipmentID mainclientEquipmentID;
     private Mainclient mainclient;
     private Equipment equipment;
     private int amount;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "Mainclient_ObjectID")
     @MapsId("mainclientID")
     public Mainclient getMainclient() {
@@ -28,7 +32,8 @@ public class MainclientEquipment implements Serializable {
         this.mainclient = mainclient;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DETACH, CascadeType.LOCK, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REPLICATE})
     @JoinColumn(name = "Equipment_EquipmentID")
     @MapsId("equipmentID")
     public Equipment getEquipment() {

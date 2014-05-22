@@ -74,6 +74,7 @@ public class ProjectX {
         Mainclient test13 = new Mainclient(0, 3, 5);
         Mainclient test14 = new Mainclient(0, 4, 6);
         Mainclient test15 = new Mainclient(0, 5, 7);
+        Connection testC100 = new Connection((byte) 100, 0);
         Connection testC11 = new Connection((byte) 50, 4);
         Connection testC12 = new Connection((byte) 20, 5);
         Connection testC13 = new Connection((byte) 40, 6);
@@ -124,7 +125,7 @@ public class ProjectX {
         ConnectionDAO connectionDAO = new ConnectionDAO();
         Equipment test5555 = new Equipment("qwe", "qwe", 1);
         MainclientDAO userDAO = new MainclientDAO();
-        Mainclient ttt = new Mainclient(1, 1, 2);
+        Mainclient ttt = new Mainclient(1, 1, 257);
         ttt.addEquipment(test5555, 5);
         EquipmentDAO testDAO = new EquipmentDAO();
         PeopleDAO peopleDAO = new PeopleDAO();
@@ -140,12 +141,22 @@ public class ProjectX {
         ConstructionDAO constructionDAO = new ConstructionDAO();
         VertexConnectionDAO vertexConnectionDAO = new VertexConnectionDAO();
         VertexConnection vertexConnection = new VertexConnection();
-        vertexConnection.setId(13);
-        vertexConnection.setMainclient(ttt);
-        vertexConnection.addVertex(ttt, testC11);
+        VertexConnection vertexConnection1 = new VertexConnection();
+        VertexConnection vertexConnection2 = new VertexConnection();
+        vertexConnection.setId(12);
+        vertexConnection1.setId(13);
+        vertexConnection2.setId(14);
+        //vertexConnection.setMainclient(ttt);
+        Connection testC101 = new Connection((byte) 100, 1);
+        vertexConnection.addVertex(ttt, testC100);
         vertexConnection.addVertex(testPeople, testC12);
+        vertexConnection1.addVertex(testPeople, testC101);
+        vertexConnection1.addVertex(ttt, testC11);
+        DirectedGraph test123 = new DirectedGraph();
+        //test123.addVertex();
         //ElementOfGraphDAO elementOfGraphDAO = new ElementOfGraphDAO();
         // ElementOfGraph elementOfGraph = new ElementOfGraph(ttt, testC20, 515);
+        DirectedGraphDAO directedGraphDAO = new DirectedGraphDAO();
         try {
             //connectionDAO.saveConnection(testC20);
             //userDAO.createEquipment("qwe", "qwe", 1011);
@@ -157,7 +168,14 @@ public class ProjectX {
             //peopleDAO.savePeople(testPeople);
             //constructionDAO.saveConstruction(testConstruction);
             //elementOfGraphDAO.saveElementOfGraph(elementOfGraph);
+            vertexConnectionDAO.saveVertexConnection(vertexConnection);
+            vertexConnectionDAO.saveVertexConnection(vertexConnection1);
             VertexConnection t1 = vertexConnectionDAO.retrieveVertexConnection(12);
+            VertexConnection t2 = vertexConnectionDAO.retrieveVertexConnection(13);
+            //DirectedGraph test123 = directedGraphDAO.retrieveDirectedGraph();
+            directedGraphDAO.deleteDirectedGraph(test123);
+            //vertexConnectionDAO.deleteVertexConnection(t1);
+            //vertexConnectionDAO.deleteVertexConnection(t2);
             System.out.print("1");
 
         } catch (Exception e) {

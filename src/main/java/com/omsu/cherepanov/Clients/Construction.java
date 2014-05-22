@@ -5,6 +5,9 @@
  */
 package com.omsu.cherepanov.Clients;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +38,8 @@ public class Construction extends Mainclient {
         this.staff = staff;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany()
+    @Cascade(CascadeType.ALL)
     @JoinTable(name = "construction_people", joinColumns = @JoinColumn(name = "Construction_Mainclient_ObjectID"), inverseJoinColumns = @JoinColumn(name = "People_Mainclient_ObjectID"))
     public List<People> getStaff() {
         return staff;

@@ -25,5 +25,6 @@
         <mapping class="com.omsu.cherepanov.Graph.ElementOfGraphID"/>
         <mapping class="com.omsu.cherepanov.Graph.ElementOfGraph"/>
         <mapping class="com.omsu.cherepanov.Graph.VertexConnection"/>
+        <mapping class="com.omsu.cherepanov.Graph.DirectedGraph"/>
     </session-factory>
 </hibernate-configuration>

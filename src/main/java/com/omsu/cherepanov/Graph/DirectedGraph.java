@@ -7,32 +7,35 @@ package com.omsu.cherepanov.Graph;
 
 import com.omsu.cherepanov.Clients.Mainclient;
 import com.omsu.cherepanov.Connection.Connection;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * @author Павел
  */
+@Embeddable
+@Table(name = "vertexconnection")
 public class DirectedGraph {
 
     private int amountOfVertex;
     private int amountOfEdge;
-    private final static byte maxDefence = 100;
-    private static Connection selfEdge = new Connection(maxDefence, 0);
-    private ArrayList<ArrayList<ElementOfGraph>> graph;
+    //private final static byte maxDefence = 100;
+    private List<VertexConnection> connectionOfVertex = new ArrayList<VertexConnection>(0);
 
     public DirectedGraph() {
+        amountOfVertex = 0;
         amountOfEdge = 0;
-        graph = new ArrayList<ArrayList<ElementOfGraph>>();
-        this.amountOfVertex = 0;
-        for (int i = 0; i < amountOfVertex; i++) {
-            graph.add((ArrayList<ElementOfGraph>) new ArrayList());
-        }
     }
-
 
     public DirectedGraph(int amountOfVertex) {
         if (amountOfVertex < 0) {
@@ -40,27 +43,46 @@ public class DirectedGraph {
         }
         this.amountOfVertex = amountOfVertex;
         amountOfEdge = 0;
-        graph = new ArrayList<ArrayList<ElementOfGraph>>(amountOfVertex);
+        connectionOfVertex = new ArrayList<VertexConnection>(amountOfVertex);
         for (int i = 0; i < amountOfVertex; i++) {
-            graph.add((ArrayList<ElementOfGraph>) new ArrayList());
+            connectionOfVertex.add(new VertexConnection());
         }
+    }
+
+    @OneToMany(fetch = FetchType.EAGER,
+            targetEntity = VertexConnection.class)
+    @Cascade(CascadeType.ALL)
+    public List<VertexConnection> getConnectionOfVertex() {
+        return connectionOfVertex;
+    }
+
+    public void setConnectionOfVertex(List<VertexConnection> connectionOfVertex) {
+        this.connectionOfVertex = connectionOfVertex;
     }
 
     public int getAmountOfVertex() {
         return amountOfVertex;
     }
 
+    public void setAmountOfVertex(int amountOfVertex) {
+        this.amountOfVertex = amountOfVertex;
+    }
+
     public int getAmountOfEdge() {
         return amountOfEdge;
     }
 
+    public void setAmountOfEdge(int amountOfEdge) {
+        this.amountOfEdge = amountOfEdge;
+    }
+
     public boolean isPresent(Mainclient client) {
-        if (graph.isEmpty()) {
+        if (connectionOfVertex.isEmpty()) {
             return false;
         }
         for (int i = 0; i < amountOfVertex; i++) {
-            if (graph.get(i).isEmpty() == false) {
-                if (graph.get(i).get(0).getVertex().equals(client)) {
+            if (connectionOfVertex.get(i).getVertexConnection().isEmpty() == false) {
+                if (connectionOfVertex.get(i).getVertexConnection().get(0).getVertex().equals(client)) {
                     return true;
                 }
             }
@@ -76,14 +98,17 @@ public class DirectedGraph {
         if (this.isPresent(vertex.getVertex())) {
             return false;
         }
+        byte maxDefence = 100;
+        Connection selfEdge = new Connection();
+        selfEdge.setDefence(maxDefence);
         //vertex.setEdge(selfEdge);
         try {
             for (int i = 0; i < amountOfVertex; i++) {
-                if (graph.get(i).isEmpty()) {
+                if (connectionOfVertex.get(i).getVertexConnection().isEmpty()) {
                     //graph.get(i).set(i, (ArrayList<ElementOfGraph>) new ArrayList());
                     try {
-                        graph.get(i).add(vertex.clone());
-                        graph.get(i).get(0).setEdge(selfEdge);
+                        connectionOfVertex.get(i).getVertexConnection().add(vertex.clone());
+                        connectionOfVertex.get(i).getVertexConnection().get(0).setEdge(selfEdge);
                         return true;
                     } catch (CloneNotSupportedException ex) {
                         Logger.getLogger(DirectedGraph.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,9 +117,9 @@ public class DirectedGraph {
                 }
             }
             try {
-                graph.add((ArrayList<ElementOfGraph>) new ArrayList());
-                graph.get(amountOfVertex).add(vertex.clone());
-                graph.get(amountOfVertex).get(0).setEdge(selfEdge);
+                connectionOfVertex.add(new VertexConnection());
+                connectionOfVertex.get(amountOfVertex).getVertexConnection().add(vertex.clone());
+                connectionOfVertex.get(amountOfVertex).getVertexConnection().get(0).setEdge(selfEdge);
                 amountOfVertex++;
                 return true;
             } catch (CloneNotSupportedException ex) {
@@ -117,7 +142,7 @@ public class DirectedGraph {
             int position = this.indexOfElementGraph(fromVertex.getVertex());
             if (position >= 0) {
                 try {
-                    graph.get(position).add(toVertex.clone());
+                    connectionOfVertex.get(position).getVertexConnection().add(toVertex.clone());
                     amountOfEdge++;
                     return true;
                 } catch (CloneNotSupportedException ex) {
@@ -132,7 +157,7 @@ public class DirectedGraph {
             int position = this.indexOfElementGraph(fromVertex.getVertex());
             if (position >= 0) {
                 try {
-                    graph.get(position).add(toVertex.clone());
+                    connectionOfVertex.get(position).getVertexConnection().add(toVertex.clone());
                     amountOfEdge++;
                     return true;
                 } catch (CloneNotSupportedException ex) {
@@ -146,7 +171,7 @@ public class DirectedGraph {
             int position = this.indexOfElementGraph(fromVertex.getVertex());
             if (position >= 0) {
                 try {
-                    graph.get(position).add(toVertex.clone());
+                    connectionOfVertex.get(position).getVertexConnection().add(toVertex.clone());
                     amountOfEdge++;
                     return true;
                 } catch (CloneNotSupportedException ex) {
@@ -161,7 +186,7 @@ public class DirectedGraph {
             int position = this.indexOfElementGraph(fromVertex.getVertex());
             if (position >= 0) {
                 try {
-                    graph.get(position).add(toVertex.clone());
+                    connectionOfVertex.get(position).getVertexConnection().add(toVertex.clone());
                     amountOfEdge++;
                     return true;
                 } catch (CloneNotSupportedException ex) {
@@ -234,8 +259,8 @@ public class DirectedGraph {
             return -1;
         }
         for (int i = 0; i < amountOfVertex; i++) {
-            if (graph.get(i).isEmpty() == false) {
-                if (graph.get(i).get(0).getVertex().equals(desiredClient)) {
+            if (connectionOfVertex.get(i).getVertexConnection().isEmpty() == false) {
+                if (connectionOfVertex.get(i).getVertexConnection().get(0).getVertex().equals(desiredClient)) {
                     return i;
                 }
             }
@@ -244,7 +269,7 @@ public class DirectedGraph {
     }
 
     public Iterator getIteratorOfElem(int indexOfElem) {
-        return graph.get(indexOfElem).iterator();
+        return connectionOfVertex.get(indexOfElem).getVertexConnection().iterator();
     }
 
 }

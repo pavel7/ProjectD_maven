@@ -2,9 +2,13 @@ package com.omsu.cherepanov.Graph;
 
 import com.omsu.cherepanov.Clients.Mainclient;
 import com.omsu.cherepanov.Connection.Connection;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OrderBy;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,7 +19,7 @@ import java.util.List;
 public class VertexConnection {
 
     private int id;
-    private Mainclient mainclient;
+    //private Mainclient mainclient;
     private List<ElementOfGraph> vertexConnection = new ArrayList<ElementOfGraph>(0);
 
     public VertexConnection() {
@@ -24,18 +28,32 @@ public class VertexConnection {
 
     public VertexConnection(VertexConnection vertexConnection) {
         this.id = vertexConnection.getId();
-        this.mainclient = vertexConnection.getMainclient();
+        //this.mainclient = vertexConnection.getMainclient();
         this.vertexConnection = vertexConnection.getVertexConnection();
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+    @OneToMany(fetch = FetchType.EAGER,
             targetEntity = ElementOfGraph.class, mappedBy = "vertexConnection")
+    @Cascade(CascadeType.ALL)
+    @OrderBy(clause = "edge")
     public List<ElementOfGraph> getVertexConnection() {
         return vertexConnection;
     }
 
     public void setVertexConnection(List<ElementOfGraph> vertexConnection) {
         this.vertexConnection = vertexConnection;
+    }
+
+    public void VertexToBegin() {
+        if (this.getVertexConnection().isEmpty() == false) {
+            int indexOfTop = 0;
+            for (int i = 0; i < this.getVertexConnection().size(); i++) {
+                if (this.getVertexConnection().get(i).getEdge().equals(100))
+                    indexOfTop = i;
+            }
+            Collections.swap(this.getVertexConnection(), 0, indexOfTop);
+        }
+
     }
 
     @Id
@@ -47,14 +65,14 @@ public class VertexConnection {
         this.id = id;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public Mainclient getMainclient() {
-        return mainclient;
-    }
-
-    public void setMainclient(Mainclient mainclient) {
-        this.mainclient = mainclient;
-    }
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    public Mainclient getMainclient() {
+//        return mainclient;
+//    }
+//
+//    public void setMainclient(Mainclient mainclient) {
+//        this.mainclient = mainclient;
+//    }
 
     public boolean addVertex(Mainclient mainclient, Connection connection) {
         if ((mainclient == null) || (connection == null)) {

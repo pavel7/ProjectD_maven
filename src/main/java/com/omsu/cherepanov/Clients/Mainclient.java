@@ -5,6 +5,9 @@
  */
 package com.omsu.cherepanov.Clients;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +78,9 @@ public class Mainclient {
         isStatus = newStatus;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+    @OneToMany(fetch = FetchType.EAGER,
             targetEntity = MainclientEquipment.class, mappedBy = "mainclient")
+    @Cascade(CascadeType.ALL)
     public List<MainclientEquipment> getEquipment() {
         return equipment;
     }

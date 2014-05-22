@@ -7,6 +7,8 @@ package com.omsu.cherepanov.Graph;
 
 import com.omsu.cherepanov.Clients.Mainclient;
 import com.omsu.cherepanov.Connection.Connection;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -48,7 +50,8 @@ public class ElementOfGraph implements Cloneable, Serializable {
         this.elementOfGraphID = elementOfGraphID;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DETACH, CascadeType.LOCK, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REPLICATE})
     @JoinColumn(name = "Mainclient_ObjectID")
     @MapsId("mainclientID")
     public Mainclient getVertex() {
@@ -59,7 +62,8 @@ public class ElementOfGraph implements Cloneable, Serializable {
         vertex = newVertex;
     }
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "Connection_ObjectID")
     @MapsId("connectionID")
     public Connection getEdge() {
@@ -70,7 +74,7 @@ public class ElementOfGraph implements Cloneable, Serializable {
         edge = newEdge;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "VertexConnection_Id")
     @MapsId("vertexconnectionID")
     public VertexConnection getVertexConnection() {
