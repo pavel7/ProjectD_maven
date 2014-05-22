@@ -48,7 +48,7 @@ public class VertexConnection {
         if (this.getVertexConnection().isEmpty() == false) {
             int indexOfTop = 0;
             for (int i = 0; i < this.getVertexConnection().size(); i++) {
-                if (this.getVertexConnection().get(i).getEdge().equals(100))
+                if (this.getVertexConnection().get(i).getEdge().getDefence() == (byte) 100)
                     indexOfTop = i;
             }
             Collections.swap(this.getVertexConnection(), 0, indexOfTop);
